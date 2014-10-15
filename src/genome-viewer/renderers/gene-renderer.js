@@ -141,7 +141,7 @@ GeneRenderer.prototype.render = function (features, args) {
                 $(featureGroup).qtip({
                     content: {text: tooltipText, title: tooltipTitle},
 //                    position: {target: "mouse", adjust: {x: 15, y: 0}, viewport: $(window), effect: false},
-                    position: {target: "mouse", adjust: {x: 25, y: 15}},
+                    position: {target: "mouse", adjust: {x: 25, y: 15}, viewport: $(window)},
                     style: { width: true, classes: _this.toolTipfontClass + ' ui-tooltip ui-tooltip-shadow'},
                     show: {delay: 300},
                     hide: {delay: 300}
@@ -212,7 +212,7 @@ GeneRenderer.prototype.render = function (features, args) {
                         $(transcriptGroup).qtip({
                             content: {text: tooltipText, title: tooltipTitle},
 //                            position: {target: 'mouse', adjust: {x: 15, y: 0}, viewport: $(window), effect: false},
-                            position: {target: "mouse", adjust: {x: 25, y: 15}},
+                            position: {target: "mouse", adjust: {x: 25, y: 15}, viewport: $(window)},
                             style: { width: true, classes: _this.toolTipfontClass + ' ui-tooltip ui-tooltip-shadow'},
                             show: {delay: 300},
                             hide: {delay: 300}
@@ -247,7 +247,7 @@ GeneRenderer.prototype.render = function (features, args) {
                             $(exonGroup).qtip({
                                 content: {text: tooltipText, title: tooltipTitle},
 //                                position: {target: 'mouse', adjust: {x: 15, y: 0}, viewport: $(window), effect: false},
-                                position: {target: "mouse", adjust: {x: 25, y: 15}},
+                                position: {target: "mouse", adjust: {x: 25, y: 15}, viewport: $(window)},
                                 style: { width: true, classes: _this.toolTipfontClass + ' ui-tooltip ui-tooltip-shadow'},
                                 show: {delay: 300},
                                 hide: {delay: 300}
