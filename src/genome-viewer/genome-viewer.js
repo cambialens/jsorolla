@@ -235,6 +235,15 @@ GenomeViewer.prototype = {
                 $(_this.targetDiv).width(event.width);
             }
         });
+        this.on('region:change', function(event) {
+            if (event.quickSearch) {
+                var feat = event.quickSearch;
+                setTimeout(function() {
+                    _this.mark({attrName:'feature_id', attrValues: feat.id});
+                    _this.highlight({attrName:'feature_id', attrValues: feat.id});
+                }, 22000);
+            }
+        });
         this.on('species:change', function (event) {
             _this.species = event.species;
             _this.chromosomes = _this.getChromosomes();
@@ -642,6 +651,7 @@ GenomeViewer.prototype = {
 
         this.on('feature:highlight', function (event) {
             trackListPanel.highlight(event);
+            this.regionOverviewPanel.highlight(event);
         });
 
         trackListPanel.draw();
@@ -907,7 +917,7 @@ GenomeViewer.prototype = {
         if ('attrValues' in args) {
             args.attrValues = ($.isArray(args.attrValues)) ? args.attrValues : [args.attrValues];
             for (var key in args.attrValues) {
-                $('rect[' + attrName + '~=' + args.attrValues[key] + ']').attr('class', cssClass);
+                $('[' + attrName + '~=' + args.attrValues[key] + '] > rect').attr('class', cssClass);
             }
 
         }
@@ -917,7 +927,7 @@ GenomeViewer.prototype = {
         if ('attrValues' in args) {
             args.attrValues = ($.isArray(args.attrValues)) ? args.attrValues : [args.attrValues];
             for (var key in args.attrValues) {
-                $('rect[' + attrName + '~=' + args.attrValues[key] + ']').attr('class', '');
+                $('[' + attrName + '~=' + args.attrValues[key] + '] > rect').attr('class', '');
             }
 
         }
