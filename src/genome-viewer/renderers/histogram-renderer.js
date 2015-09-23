@@ -31,17 +31,7 @@ function HistogramRenderer(args) {
 //    this.multiplier = 7;
 
     this.maxValue = 10;
-    if (args != null) {
-        if (args.height != null) {
-            this.histogramHeight = args.height * 0.95;
-        }
-        if (args.histogramMaxFreqValue != null) {
-            this.maxValue = args.histogramMaxFreqValue;
-        }
-    }
-    //this.multiplier = 7;
-    this.multiplier = this.histogramHeight / this.maxValue;
-
+    this.updateScale(args);
     //set instantiation args
     _.extend(this, args);
 
@@ -50,8 +40,9 @@ function HistogramRenderer(args) {
 HistogramRenderer.prototype._checkFeatureValue = function (feature) {
     if (feature.features_count == null) {
 //            var height = Math.log(features[i].absolute);
-        if (feature.absolute != 0) {
-            feature.features_count = Math.log(feature.absolute);
+        if (feature.absolute != 0 && feature.absolute > 0) {
+            // take care of feature.absolute==1 counts and set scaled value to 0.2 as log(2) ~= 0.3
+            feature.features_count = Math.max(0.2,Math.log(feature.absolute));
         } else {
             feature.features_count = 0;
         }
@@ -65,10 +56,30 @@ HistogramRenderer.prototype._checkFeatureValue = function (feature) {
 //        }
 }
 
+/**
+ * updates "this.multiplier" using "histogramMaxFreqValue" and "height"
+ * @param args
+ */
+HistogramRenderer.prototype.updateScale = function(args) {
+    if (args != null) {
+        if (args.height != null) {
+            this.histogramHeight = args.height * 0.95;
+        }
+        if (args.histogramMaxFreqValue != null) {
+            this.maxValue = args.histogramMaxFreqValue;
+        }
+    }
+    //this.multiplier = 7;
+    this.multiplier = this.histogramHeight / this.maxValue;
+};
+
 HistogramRenderer.prototype.render = function (features, args) {
     var middle = args.width / 2;
-    console.log(middle)
+    console.log(middle);
     var points = '';
+
+    this.updateScale(args);
+
     if (features.length > 0) {
         var firstFeature = features[0].value;
         var width = (firstFeature.end - firstFeature.start + 1) * args.pixelBase;
