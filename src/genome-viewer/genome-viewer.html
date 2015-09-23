@@ -164,7 +164,18 @@ var run = function () {
     };
     var species = availableSpecies.items[0].items[0];
 
-
+//    http://bioinfo.hpc.cam.ac.uk/cellbase/webservices/rest/v3/hsapiens/feature/gene/BRCA2/info
+/*
+ http://bioinfodev.hpc.cam.ac.uk/cellbase/webservices/rest/v3/hsapiens/feature/gene/BRCA2/info
+ http://bioinfo.hpc.cam.ac.uk/cellbase/webservices/rest/v3/hsapiens/feature/gene/BRCA2/info
+ http://www.ebi.ac.uk/cellbase/webservices/rest/v3/hsapiens/feature/gene/BRCA2/info
+ https://www.ebi.ac.uk/cellbase/webservices/rest/v3/hsapiens/genomic/chromosome/all?of=json
+ http://bioinfodev.hpc.cam.ac.uk/web-apps/genome-maps/
+ OLD:
+ https://www.ebi.ac.uk/cellbase/webservices/rest/v3/hsapiens/genomic/chromosome/all?of=json
+ DEV:
+ https://wwwdev.ebi.ac.uk/cellbase/webservices/rest/v3/hsapiens/genomic/chromosome/all?of=json
+*/
     genomeViewer = new GenomeViewer({
         cellBaseHost: 'https://www.ebi.ac.uk/cellbase/webservices/rest',
         cellBaseVersion: 'v3',
